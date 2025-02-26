@@ -67,8 +67,33 @@ public class Password {
      */
     public static boolean isStrongPassword(String password) {
 
-        // Code here
+        boolean haveUppercase = false;
+        boolean haveNumber = false;
+        boolean haveLower = false;
 
+        if (password.length() < 12) {
+            return false;
+        }
+
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (Character.isUpperCase(c)) {
+                haveUppercase = true;
+            }
+            if (Character.isDigit(c)) {
+                haveNumber = true;
+            }
+            if (Character.isLowerCase(c)) {
+                haveLower = true;
+            }
+            if (Character.isWhitespace(c)) {
+                return false;
+            }
+        }
+
+        if (haveLower && haveNumber && haveUppercase) {
+            return true;
+        }
         return false;
     }
 
