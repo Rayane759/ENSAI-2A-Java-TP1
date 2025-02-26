@@ -10,8 +10,31 @@ public class Login {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
 
-            // Code here
+            boolean hasUsername = userDatabase.containsKey(username);
+
+            while (hasUsername) {
+                int nbEssais = 1;
+
+                while (nbEssais < 4) {
+                    System.out.print("Enter password: ");
+                    String password = scanner.nextLine();
+
+                    String truePassword = userDatabase.get(username);
+
+                    if (password.equals(truePassword)) {
+                        System.out.print("Login successful!");
+                        scanner.close();
+                    }
+                    System.out.print("Login failed. Wrong password");
+                    nbEssais += 1;
+                }
+
+                hasUsername = false;
+            }
+            scanner.close();
         }
     }
 
