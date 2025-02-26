@@ -1,9 +1,11 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Password {
     /**
@@ -130,9 +132,38 @@ public class Password {
      */
     public static String generatePassword(int nbCar) {
 
-        // Code here
+        if (nbCar < 4) {
+            String message = "nbCar doit être au moins égal à 4";
+            return message;
+        }
 
-        return null;
+        List<String> mdpGenere = new ArrayList<>();
+
+        char[] minChars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        char[] majChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        char[] speChars = "&([-_@)]=}$£ù%*µ)".toCharArray();
+
+        Random random = new Random();
+
+        for (int i = 0; i <= nbCar; i++) {
+            char cChar = minChars[random.nextInt(minChars.length)];
+            String c = Character.toString(cChar);
+            mdpGenere.add(c);
+            char cMajChar = majChars[random.nextInt(majChars.length)];
+            String cMaj = Character.toString(cMajChar);
+            mdpGenere.add(cMaj);
+            int j = random.nextInt(100);
+            String jText = Integer.toString(j);
+            mdpGenere.add(jText);
+            char sChar = speChars[random.nextInt(speChars.length)];
+            String s = Character.toString(sChar);
+            mdpGenere.add(s);
+        }
+
+        Collections.shuffle(mdpGenere);
+        String mdpFinal = String.join("", mdpGenere);
+
+        return mdpFinal;
     }
 
     public static void main(String[] args) {
