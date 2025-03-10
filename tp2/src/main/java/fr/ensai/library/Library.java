@@ -23,6 +23,14 @@ public class Library {
     }
 
     /**
+     * Gets the list of books in the library.
+     * @return List of books in the library.
+     */
+    public List<Book> getBooks() {
+        return this.books;
+    }
+
+    /**
      * Loads books from a CSV file and adds them to the library.
      * 
      * @param filePath The path to the CSV file containing book data.
