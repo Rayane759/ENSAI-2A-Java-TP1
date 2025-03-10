@@ -15,16 +15,32 @@ public class Main {
 
         System.out.println(fellowshipOfTheRing.toString());
 
+        Magazine magazine8 = new Magazine(
+            "888-8-888-88888-8",
+            "Quelque",
+            8888,
+            1888,
+            88
+        );
+
+        Magazine magazine9 = new Magazine(
+            "999-9-999-99999-9",
+            "Chose",
+            9999,
+            1999,
+            99
+        );
+
         Library librairie = new Library("Librairie", List.of());
 
         try {
             librairie.loadBooksFromCSV("src/main/resources/books.csv");
         } catch (IOException e) {
-            System.err.println("Error loading books from CSV: " + e.getMessage());
+            System.err.println("Error loading items from CSV: " + e.getMessage());
         }
 
-        for (Book book : librairie.getBooks()) {
-            System.out.println(book);
+        for (Item item : librairie.displayItems()) {
+            System.out.println(item);
         }
     }
 }
