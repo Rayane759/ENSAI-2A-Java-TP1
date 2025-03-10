@@ -14,5 +14,17 @@ public class Main {
                 423);
 
         System.out.println(fellowshipOfTheRing.toString());
+
+        Library librairie = new Library("Librairie", List.of());
+
+        try {
+            librairie.loadBooksFromCSV("src/main/resources/books.csv");
+        } catch (IOException e) {
+            System.err.println("Error loading books from CSV: " + e.getMessage());
+        }
+
+        for (Book book : librairie.getBooks()) {
+            System.out.println(book);
+        }
     }
 }
