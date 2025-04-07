@@ -3,8 +3,6 @@ package fr.ensai.running.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +13,6 @@ import fr.ensai.running.repository.RegistrationRepository;
 
 @Service
 public class AthleteService {
-
-    private static final Logger log = LoggerFactory.getLogger(AthleteService.class);
 
     @Autowired
     private AthleteRepository athleteRepository;
@@ -54,7 +50,6 @@ public class AthleteService {
         List<Registration> regs = registrationRepository.findAll().stream()
                 .filter(r -> r.getAthlete().getIdAthlete() == id)
                 .collect(Collectors.toList());
-
         regs.forEach(registrationRepository::delete);
         athleteRepository.deleteById(id);
     }
