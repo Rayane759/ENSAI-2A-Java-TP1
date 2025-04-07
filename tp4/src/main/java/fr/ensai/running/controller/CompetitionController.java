@@ -19,13 +19,13 @@ public class CompetitionController {
 
     @GetMapping
     public String getAllCompetitions(Model model) {
-        model.addAttribute("competitions", CompetitionService.getAllCompetitions());
+        model.addAttribute("competitions", competitionService.getAllCompetitions());
         return "allCompetitions";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteCompetition(@PathVariable(value = "id") Long id) {
-        Competition competition = CompetitionService.getCompetitionById(id);
+        Competition competition = competitionService.getCompetitionById(id);
         if (competition != null) {
             competitionService.deleteCompetition(id);
         }
