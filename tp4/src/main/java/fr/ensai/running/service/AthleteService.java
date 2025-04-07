@@ -1,6 +1,7 @@
 package fr.ensai.running.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.ensai.running.model.Athlete;
+import fr.ensai.running.model.Registration;
 import fr.ensai.running.repository.AthleteRepository;
+import fr.ensai.running.repository.RegistrationRepository;
 
 @Service
 public class AthleteService {
@@ -17,6 +20,9 @@ public class AthleteService {
 
     @Autowired
     private AthleteRepository athleteRepository;
+
+    @Autowired
+    private RegistrationRepository registrationRepository;
 
     /**
      * Find an Athlete by id
@@ -45,7 +51,11 @@ public class AthleteService {
      * Delete an Athlete by id
      */
     public void deleteById(Long id) {
+        List<Registration> regs = registrationRepository.findAll().stream()
+                .filter(r -> r.getAthlete().getIdAthlete() == id)
+                .collect(Collectors.toList());
+
+        regs.forEach(registrationRepository::delete);
         athleteRepository.deleteById(id);
-        log.warn("Athlete {} deleted", id);
     }
 }

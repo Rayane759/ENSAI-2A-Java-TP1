@@ -27,4 +27,8 @@ public class Athlete {
         return "Athlete (" + firstName + " " + lastName + ", " + age + ")";
     }
 
+    public Long getIdAthlete() {
+        return id;
+    }
+
 }
